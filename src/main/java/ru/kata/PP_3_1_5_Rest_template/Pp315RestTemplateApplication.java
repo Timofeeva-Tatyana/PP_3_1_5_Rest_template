@@ -11,7 +11,6 @@ import java.util.Objects;
 @SpringBootApplication
 public class Pp315RestTemplateApplication {
 	private static final String URL = "http://94.198.50.185:7081/api/users";
-
 	static RestTemplate restTemplate = new RestTemplate();
 	static HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -33,7 +32,7 @@ public class Pp315RestTemplateApplication {
 	}
 
 	private void createUser() {
-		User user = new User(3L, "James", "Brown", (byte) 16);
+		User user = new User(3L, "James", "Brown", (byte) 17);
 		HttpEntity<User> httpEntity = new HttpEntity<>(user, httpHeaders);
 		System.out.println(httpEntity);
 		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, httpEntity, String.class);
@@ -42,7 +41,7 @@ public class Pp315RestTemplateApplication {
 	}
 
 	private void updateUser() {
-		User user = new User(3L, "Thomas", "Shelby", (byte) 16);
+		User user = new User(3L, "Thomas", "Shelby", (byte) 17);
 		HttpEntity<User> httpEntity = new HttpEntity<>(user, httpHeaders);
 		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, httpEntity, String.class);
 		System.out.println(responseEntity.getBody());
@@ -51,7 +50,8 @@ public class Pp315RestTemplateApplication {
 
 	private void deleteUser() {
 		HttpEntity<User> httpEntity = new HttpEntity<>(null, httpHeaders);
-		ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/3", HttpMethod.DELETE, httpEntity, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/3",
+				HttpMethod.DELETE, httpEntity, String.class);
 		System.out.println(responseEntity.getBody());
 
 	}
